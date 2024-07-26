@@ -40,7 +40,7 @@ def prompt_formatter(prompt, retrieved_results):
                                    f" {row['SA']}|"
                                    f" {row['premium_monthl_buyNow']}|"
                                    f" {row['age']}|\n" for i, row in retrieved_results.iterrows()])
-    formatted_prompt = f"As a Insurance Advisor answer user query from the following results.Provide clear answer to user. User details are {prompt}.The sum assured is in indian system Results:\n{formatted_results}"
+    formatted_prompt = f"You are a Insurance advisor. As a chat bot provide clear and consise answer to user from previous responses or the following context.Context: User details are {prompt}:\n{formatted_results}"
     return formatted_prompt
 
 
@@ -57,7 +57,11 @@ def res():
         occupation_type=data['occupation']
         coverage_amount=data['coverage_amt']
         prompt = data['prompt']
-        
+        message=data['message']
+        chat = []
+        for i in message:
+            chat.append({"role": "user" if i['user'] else "assistant","content":i['text']})
+        print(message)
         if(not prompt):
             return jsonify({"err":"err"})
         result = get_similarities(f'{tobacco} {coverage_amount} {age} {occupation_type}', df, 3)
@@ -70,15 +74,15 @@ def res():
             coverage_amount='1.5 Crore'
         
         details = f'Sum Assured(requested by user):{coverage_amount} Age of user:{age} occupation type of user:{occupation_type}'
-        chat = [
-            {  
-                "role": "user", "content": f"{prompt}\n" },
-            {
-                "role":"system","content":f"{prompt_formatter(details,result)}"
-            }
-        ]
-        output=ollama.chat('mistral',messages=chat)
+         
+        chat.append( {  
+                "role": "user", "content": f"{prompt}\n" })
         
+        chat.append( {
+                "role":"system","content":f"{prompt_formatter(details,result)}"
+            })
+        output=ollama.chat('mistral',messages=chat)
+       
         print(output)
         output=output['message']['content']
         return jsonify({"response": output})
