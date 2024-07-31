@@ -11,6 +11,7 @@ import {
   FaShieldAlt,
   FaPaperPlane,
 } from "react-icons/fa";
+import { IoSend } from "react-icons/io5";
 
 // Animation Keyframes
 const cu1 = keyframes`
@@ -185,8 +186,8 @@ const ChatInput = styled.input`
 `;
 
 const ChatButton = styled.button`
-  background: #4a90e2;
-  color: #fff;
+  background: #000;
+  color: #808080;
   border: none;
   padding: 10px;
   border-radius: 20px;
@@ -198,7 +199,7 @@ const ChatButton = styled.button`
   transition: background 0.3s;
 
   &:hover {
-    background: #357abd;
+    background: #333;
   }
 `;
 
@@ -378,7 +379,7 @@ const ChatBot = () => {
             placeholder="Type a message..."
           />
           <ChatButton onClick={handleSend}>
-            <FaPaperPlane size={18} />
+            <IoSend size={18} />
           </ChatButton>
         </InputContainer>
       </ChatWrapper>
