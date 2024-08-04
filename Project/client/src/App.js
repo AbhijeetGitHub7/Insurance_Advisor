@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 import { useRef } from "react";
 import { useEffect } from "react";
 import React, { useState } from "react";
@@ -11,6 +13,7 @@ import {
   FaShieldAlt,
   FaPaperPlane,
 } from "react-icons/fa";
+import { IoSend } from "react-icons/io5";
 
 // Animation Keyframes
 const cu1 = keyframes`
@@ -185,8 +188,8 @@ const ChatInput = styled.input`
 `;
 
 const ChatButton = styled.button`
-  background: #4a90e2;
-  color: #fff;
+  background: #000;
+  color: #808080;
   border: none;
   padding: 10px;
   border-radius: 20px;
@@ -198,7 +201,7 @@ const ChatButton = styled.button`
   transition: background 0.3s;
 
   &:hover {
-    background: #357abd;
+    background: #333;
   }
 `;
 
@@ -378,19 +381,25 @@ const ChatBot = () => {
             placeholder="Type a message..."
           />
           <ChatButton onClick={handleSend}>
-            <FaPaperPlane size={18} />
+            <IoSend size={18} />
           </ChatButton>
         </InputContainer>
       </ChatWrapper>
     </ChatContainer>
   );
 };
+>>>>>>> 161d9f65 (Update App.js)
 
+import { Route, Routes } from "react-router-dom";
+import ChatBot from "./components/ChatBot";
+import Home from "./components/Home";
+import Land from "./components/Login";
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/details" element={<Home />} />
       <Route path="/chat" element={<ChatBot />} />
+      <Route path="/" element={<Land />} />
     </Routes>
   );
 };
