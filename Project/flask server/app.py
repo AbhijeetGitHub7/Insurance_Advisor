@@ -51,7 +51,7 @@ def prompt_formatter(prompt, retrieved_results):
 def res():
     try:
         data = request.get_json()
-        print(type(data))
+        print(data)
         age = data['age']
         tobacco = data['tobacco']
         occupation_type=data['occupation']
